@@ -23,7 +23,7 @@ const form = useForm({
         </template>
 
         <div class="py-12">
-            <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
                 <form v-if="false" @submit.prevent="form.post(route('applications.store'), { onSuccess: () => form.reset() })">
                     <label>Type</label>
                     <select v-model="form.type"  class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
@@ -56,7 +56,7 @@ const form = useForm({
                     <InputError :message="form.errors.qta" class="mb-4" />
                     <PrimaryButton class="mt-4 mb-6">Send Request</PrimaryButton>
                 </form>
-                <div class=" bg-white shadow-sm rounded-lg divide-y">
+                <div class=" bg-white dark:bg-gray-800 shadow-sm rounded-lg divide-y">
                     <RequestElement
                         v-for="req in applications"
                         :key="req.id"

@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useForm, Head } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 
-const props = defineProps(['items', 'canCreate']);
+const props = defineProps(['companies']);
 
 const form = useForm({
     name: '',
@@ -18,7 +18,7 @@ const form = useForm({
 const search = ref('');
 
 const filteredItems = computed(() => {
-  let res = Object.values(props.items);
+  let res = Object.values(props.companies);
 
   if (!search.value) {
     return res;
@@ -34,12 +34,12 @@ const filteredItems = computed(() => {
     <Head title="Items" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Items</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Companies</h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-                <form v-if="canCreate" @submit.prevent="form.post(route('items.store'), { onSuccess: () => form.reset() })">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <form v-if="false" @submit.prevent="form.post(route('companies.store'), { onSuccess: () => form.reset() })">
                     <label>Name</label>
                     <input
                         v-model="form.name"
@@ -74,8 +74,8 @@ const filteredItems = computed(() => {
                     <PrimaryButton class="mt-4 mb-6">Create Item</PrimaryButton>
                 </form>
 
-                <label>Filter Category</label>
-                <select v-model="search" class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <label class="text-gray-900 dark:text-gray-100">Filter Category</label>
+                <select v-model="search" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                     <option value="">All</option>
                     <option value="0">None</option>
                     <option value="1">Hard</option>
@@ -84,7 +84,7 @@ const filteredItems = computed(() => {
                     <option value="4">Need</option>
                 </select>
 
-                <div class=" bg-white shadow-sm rounded-lg divide-y">
+                <div class=" bg-white dark:bg-gray-800 shadow-sm rounded-lg divide-y">
                     <ItemElement
                         v-for="item in filteredItems"
                         :key="item.id"
@@ -92,8 +92,8 @@ const filteredItems = computed(() => {
                     />
                 </div>
 
-                <div v-if="items.length < 1" class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">No item available now!</div>
+                <div v-if="companies.length < 1" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">No item available now!</div>
                 </div>
             </div>
         </div>
