@@ -5,7 +5,7 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useForm, Head } from '@inertiajs/vue3';
 
-defineProps(['requests', 'canUpdate', 'items']);
+defineProps(['applications', 'companies']);
 
 const form = useForm({
     item_id: '',
@@ -19,12 +19,12 @@ const form = useForm({
     <Head title="Requests" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Requests</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Applications</h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-                <form v-if="!canUpdate" @submit.prevent="form.post(route('requests.store'), { onSuccess: () => form.reset() })">
+                <form v-if="false" @submit.prevent="form.post(route('applications.store'), { onSuccess: () => form.reset() })">
                     <label>Type</label>
                     <select v-model="form.type"  class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                         <option value="0">Take</option>
@@ -35,7 +35,7 @@ const form = useForm({
                     <label>Item</label>
                     <select v-if="form.type === 0"  v-model="form.item_id" class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                         <option value="">Select</option>
-                        <option v-for="it in items" :key="it" :value="it.id">{{ it.name }}</option>
+                        <option v-for="it in companies" :key="it" :value="it.id">{{ it.name }}</option>
                     </select>
                     <input
                         v-else
@@ -58,15 +58,15 @@ const form = useForm({
                 </form>
                 <div class=" bg-white shadow-sm rounded-lg divide-y">
                     <RequestElement
-                        v-for="req in requests"
+                        v-for="req in applications"
                         :key="req.id"
                         :request="req"
-                        :items="items"
+                        :companies="companies"
                     />
                 </div>
 
-                <div v-if="requests.length < 1" class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">No requests for now!</div>
+                <div v-if="applications.length < 1" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">No applications for now!</div>
                 </div>
             </div>
         </div>
