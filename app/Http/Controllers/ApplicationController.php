@@ -38,17 +38,15 @@ class ApplicationController extends Controller
     {
         
         $validated = $request->validate([
-            'item_id' => 'exclude_if:type,1|required|integer',
-            'item' => 'exclude_if:type,0|required|string|max:255',
-            'status' => 'integer',
-            'type' => 'integer',
-            'qta' => 'required|integer|min:1',
+            'company_id' => 'required|integer',
+            'status' => 'required|integer',
+            'notes' => 'string|max:255',
+            'role' => 'required|string|max:255'
         ]);
             
         $request->user()->applications()->create($validated);
      
         return redirect(route('applications.index'));
-        
     }
 
     /**
@@ -72,33 +70,26 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $requestModel): RedirectResponse
     {
-            Gate::authorize('update', $requestModel);
+        Gate::authorize('update', $requestModel);
 
-            $validated = $request->validate([
-                'status' => 'required|integer',
-                'id' => 'required'
-            ]);
+        $validated = $request->validate([
+            'id' => 'required|integer',
+            'company_id' => 'required|integer',
+            'status' => 'required|integer',
+            'notes' => 'string|max:255',
+            'role' => 'required|string|max:255'
+        ]);
      
-            $req = Application::find($validated['id']);
+        $req = Application::find($validated['id']);
             
-            $req->status = $validated['status'];
+        $req->company_id = $validated['company_id'];
+        $req->status = $validated['status'];
+        $req->notes = $validated['notes'];
+        $req->role = $validated['role'];
 
-            if ($req->save()) {
-                // check status
-                if ((int)$req->status === 1 && (int)$req->type === 0) {
-                    // prenderci item
-                    $item = Company::find($req->item_id);
-                    // togliere
-                    if ($item) {
-                        $item->availability -= $req->qta;
-                        // salvare
-                        $item->save();
-                    }
-                    
-                }
-            }
+        $req->save();
             
-            return redirect(route('applications.index'));
+        return redirect(route('applications.index'));
     }
 
     /**

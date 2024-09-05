@@ -46,7 +46,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function requests(): HasMany
+    public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
     }

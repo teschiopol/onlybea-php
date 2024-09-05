@@ -12,7 +12,9 @@ class Application extends Model
 
     protected $fillable = [
         'status',
-        'type'
+        'role',
+        'notes',
+        'company_id'
     ];
 
     public function user(): BelongsTo
