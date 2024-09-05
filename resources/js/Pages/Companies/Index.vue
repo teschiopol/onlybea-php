@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import ItemElement from '@/Components/CompanyElement.vue';
+import CompanyElement from '@/Components/CompanyElement.vue';
 import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useForm, Head } from '@inertiajs/vue3';
@@ -10,9 +10,7 @@ const props = defineProps(['companies']);
 
 const form = useForm({
     name: '',
-    color: '',
-    availability: 0,
-    category: 0
+    hq: ''
 });
 
 const search = ref('');
@@ -25,13 +23,13 @@ const filteredItems = computed(() => {
   }
 
   return res.filter((item) => {
-    return parseInt(item.category) === parseInt(search.value)
+    return item.name.includes(search.value);
   });
 });
 </script>
  
 <template>
-    <Head title="Items" />
+    <Head title="Companies" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Companies</h2>
@@ -39,53 +37,32 @@ const filteredItems = computed(() => {
 
         <div class="py-12">
             <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                <form v-if="false" @submit.prevent="form.post(route('companies.store'), { onSuccess: () => form.reset() })">
-                    <label>Name</label>
+                <form @submit.prevent="form.post(route('companies.store'), { onSuccess: () => form.reset() })">
+                    <label class="text-gray-900 dark:text-gray-100">Name</label>
                     <input
                         v-model="form.name"
-                        placeholder="Best Keyboard"
-                        class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                        placeholder="Acme"
+                        class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     ></input>
                     <InputError :message="form.errors.name" class="mb-4" />
-                    <label>Availability</label>
+                    <label class="text-gray-900 dark:text-gray-100">Headquarter</label>
                     <input
-                        v-model="form.availability"
-                        min="0"
-                        type="number"
-                        class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                        v-model="form.hq"
+                        placeholder="Milan"
+                        class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                     ></input>
-                    <InputError :message="form.errors.availability" class="mb-4" />
-                    <label>Category</label>
-                    <select v-model="form.category"  class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                        <option value="0">None</option>
-                        <option value="1">Hard</option>
-                        <option value="2">Soft</option>
-                        <option value="3">Useless</option>
-                        <option value="4">Need</option>
-                    </select>
-                    <InputError :message="form.errors.category" class="mb-4" />
-                    <label>Color</label>
-                    <input
-                        v-model="form.color"
-                        placeholder="Purple"
-                        class="mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                    ></input>
-                    <InputError :message="form.errors.color" class="mb-4" />
-                    <PrimaryButton class="mt-4 mb-6">Create Item</PrimaryButton>
+                    <InputError :message="form.errors.hq" class="mb-4" />
+                    <PrimaryButton class="mt-4 mb-6">Save Company</PrimaryButton>
                 </form>
 
-                <label class="text-gray-900 dark:text-gray-100">Filter Category</label>
-                <select v-model="search" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <option value="">All</option>
-                    <option value="0">None</option>
-                    <option value="1">Hard</option>
-                    <option value="2">Soft</option>
-                    <option value="3">Useless</option>
-                    <option value="4">Need</option>
-                </select>
-
+                <label class="text-gray-900 dark:text-gray-100">Filter Company</label>
+                <input
+                    type="text" v-model="search" autocomplete="off"
+                    class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                ></input>
+               
                 <div class=" bg-white dark:bg-gray-800 shadow-sm rounded-lg divide-y">
-                    <ItemElement
+                    <CompanyElement
                         v-for="item in filteredItems"
                         :key="item.id"
                         :item="item"
@@ -93,7 +70,7 @@ const filteredItems = computed(() => {
                 </div>
 
                 <div v-if="companies.length < 1" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">No item available now!</div>
+                    <div class="p-6 text-gray-900 dark:text-gray-100">No companies yet!</div>
                 </div>
             </div>
         </div>

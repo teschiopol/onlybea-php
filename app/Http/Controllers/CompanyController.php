@@ -34,16 +34,14 @@ class CompanyController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {   
-             $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'color' => 'nullable|string|max:255',
-                'category' => 'nullable|integer',
-                'availability' => 'required|integer|min:0',
-            ]);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'hq' => 'nullable|string|max:255',
+        ]);
 
-            Company::create($validated);
+         Company::create($validated);
      
-            return redirect(route('companies.index')); 
+        return redirect(route('companies.index')); 
     }
 
     /**
@@ -67,16 +65,14 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company): RedirectResponse
     {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'color' => 'nullable|string|max:255',
-                'category' => 'nullable|integer',
-                'availability' => 'required|integer|min:0',
-            ]);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'hq' => 'nullable|string|max:255',
+        ]);
      
-            $company->update($validated);
+        $company->update($validated);
      
-            return redirect(route('companies.index'));
+        return redirect(route('companies.index'));
     }
 
     /**

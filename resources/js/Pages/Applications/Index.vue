@@ -16,7 +16,7 @@ const form = useForm({
 </script>
  
 <template>
-    <Head title="Requests" />
+    <Head title="Applications" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">Applications</h2>
