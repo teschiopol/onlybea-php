@@ -74,8 +74,13 @@ const changeTheme = () => {
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('applications')" :active="route().current('applications')">
+                                <NavLink :href="route('applications.index')" :active="route().current('applications.index')">
                                     Applications
+                                </NavLink>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('companies.index')" :active="route().current('companies.index')">
+                                    Companies
                                 </NavLink>
                             </div>
                         </div>
@@ -176,8 +181,13 @@ const changeTheme = () => {
                         </ResponsiveNavLink>
                     </div>
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('applications')" :active="route().current('applications')">
+                        <ResponsiveNavLink :href="route('applications.index')" :active="route().current('applications.index')">
                             Applications
+                        </ResponsiveNavLink>
+                    </div>
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('companies.index')" :active="route().current('companies.index')">
+                            Companies
                         </ResponsiveNavLink>
                     </div>
 

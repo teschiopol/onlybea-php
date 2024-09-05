@@ -33,11 +33,8 @@ class CompanyController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request): RedirectResponse
-    {
-    
- 
-
-            $validated = $request->validate([
+    {   
+             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'color' => 'nullable|string|max:255',
                 'category' => 'nullable|integer',
@@ -46,8 +43,7 @@ class CompanyController extends Controller
 
             Company::create($validated);
      
-            return redirect(route('companies.index'));
-      
+            return redirect(route('companies.index')); 
     }
 
     /**
@@ -71,8 +67,6 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company): RedirectResponse
     {
-   
-     
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'color' => 'nullable|string|max:255',
@@ -83,7 +77,6 @@ class CompanyController extends Controller
             $company->update($validated);
      
             return redirect(route('companies.index'));
-    
     }
 
     /**

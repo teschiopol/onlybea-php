@@ -72,9 +72,6 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $requestModel): RedirectResponse
     {
- 
-
-     
             Gate::authorize('update', $requestModel);
 
             $validated = $request->validate([
@@ -101,9 +98,7 @@ class ApplicationController extends Controller
                 }
             }
             
-     
             return redirect(route('applications.index'));
-     
     }
 
     /**

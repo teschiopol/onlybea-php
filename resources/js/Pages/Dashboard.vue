@@ -38,30 +38,39 @@ const categoryOptions = ref ({
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+            <h2 class="font-semibold text-xl text-gray-800  dark:text-gray-100 leading-tight">Dashboard</h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
-                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 text-center">
-                            <p class="font-semibold">Most Request</p>
-                            <p>Keyboard</p>
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+                            <p class="font-semibold">Total</p>
+                            <p>578</p>
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 text-center">
-                            <p class="font-semibold">User with Most Request</p>
-                            <p>User 2</p>
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+                            <p class="font-semibold">Sent</p>
+                            <p>2</p>
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 max-h-80	">
-                            <p class="font-semibold text-center">Requests</p>
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+                            <p class="font-semibold">Ignored</p>
+                            <p>20</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
+                            <p class="font-semibold">Rejected</p>
+                            <p>56</p>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 max-h-80 mb-2">
+                            <p class="font-semibold text-center">Work Type</p>
                             <Pie
                                 id="request-stats"
                                 :options="requestOptions"
@@ -69,9 +78,9 @@ const categoryOptions = ref ({
                             />
                         </div>
                     </div>
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 max-h-80	">
-                            <p class="font-semibold text-center">Categories</p>
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 max-h-80 mb-2">
+                            <p class="font-semibold text-center">Applications</p>
                             <Pie
                                 id="rcategory-stats"
                                 :options="categoryOptions"
