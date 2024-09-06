@@ -35,6 +35,10 @@ Route::resource('applications', ApplicationController::class)
 
 Route::resource('companies', CompanyController::class)
     ->only(['index', 'store', 'update'])
-    ->middleware(['auth', 'verified']);    
+    ->middleware(['auth', 'verified']);
+
+Route::get('/jobs', function () {
+    return Inertia::render('Jobs');
+})->middleware(['auth', 'verified'])->name('jobs');
 
 require __DIR__.'/auth.php';
