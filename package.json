@@ -20,6 +20,11 @@
         "vue-tsc": "^2.0.24"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/free-brands-svg-icons": "^6.6.0",
+        "@fortawesome/free-regular-svg-icons": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "chart.js": "^4.4.4",
         "dayjs": "^1.11.13",
         "vue-chartjs": "^5.3.1"

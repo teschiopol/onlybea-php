@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import SingleCard from '@/Components/SingleCard.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { Pie } from 'vue-chartjs'
@@ -44,30 +45,10 @@ const categoryOptions = ref ({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                            <p class="font-semibold">Total</p>
-                            <p>578</p>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                            <p class="font-semibold">Sent</p>
-                            <p>2</p>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                            <p class="font-semibold">Ignored</p>
-                            <p>20</p>
-                        </div>
-                    </div>
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                            <p class="font-semibold">Rejected</p>
-                            <p>56</p>
-                        </div>
-                    </div>
+                    <SingleCard title="Total" :counter="142" icon-color="blue" icon="pi-folder-open" />
+                    <SingleCard title="Sent" :counter="54" icon-color="purple" icon="pi-file-arrow-up" />
+                    <SingleCard title="Ignored" :counter="19" icon-color="orange" icon="pi-ban" />
+                    <SingleCard title="Reject" :counter="3" icon-color="red" icon="pi-times" />
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900 dark:text-gray-100 max-h-80 mb-2">
                             <p class="font-semibold text-center">Work Type</p>
