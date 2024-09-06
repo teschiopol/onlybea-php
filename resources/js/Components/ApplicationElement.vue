@@ -9,25 +9,24 @@ import { ref } from 'vue';
  
 dayjs.extend(relativeTime);
 
-const props = defineProps(['request', 'items']);
+const props = defineProps(['application', 'companies']);
  
 const form = useForm({
-    status: props.request.status,
-    id: props.request.id,
+    status: props.application.status,
+    id: props.application.id,
+    company_id: props.application.company_id,
+    role: props.application.role,
+    notes: props.application.notes
 });
 
 const status = [
-    'Pending', 'Approved', 'Rejected'
-];
-
-const type = [
-    'Take', 'Buy'
+    'Sent', 'Ignored', 'Rejected', 'Technical Test', 'Offer'
 ];
 
 const editing = ref(false);
 
 const getItemById = (id) => {
-    let con = Object.entries(props.items);
+    let con = Object.entries(props.companies);
     let find = con.filter(el => {
         return el[1].id === id
     });
@@ -42,45 +41,69 @@ const getItemById = (id) => {
         <div class="flex-1">
             <div class="flex justify-between items-center">
                 <div>
-                    <span class="text-gray-800">#{{ request.id }} from {{ request.user.name }}</span>
-                    <small v-if="request.created_at === request.updated_at" class="text-sm text-gray-600"> - created {{ dayjs(request.created_at).fromNow() }}</small>
-                    <small v-else class="text-sm text-gray-600"> - edited {{ dayjs(request.updated_at).fromNow() }}</small>
+                    <span class="text-gray-800 dark:text-gray-200">#{{ application.id }}</span>
+                    <small v-if="application.created_at === application.updated_at" class="text-sm text-gray-600 dark:text-gray-400"> - created {{ dayjs(application.created_at).fromNow() }}</small>
+                    <small v-else class="text-sm text-gray-600 dark:text-gray-400"> - edited {{ dayjs(application.updated_at).fromNow() }}</small>
                 </div>
-                <Dropdown v-if="$page.props.auth.user.is_admin && request.status === 0">
+                <Dropdown>
                     <template #trigger>
                         <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 dark:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                             </svg>
                         </button>
                     </template>
                     <template #content>
-                        <button class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" @click="editing = true">
+                        <button class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" @click="editing = true">
                             Edit
                         </button>
                     </template>
                 </Dropdown>
             </div>
-            <form v-if="editing" @submit.prevent="form.put(route('requests.update', request.id), { onSuccess: () => editing = false })">
-                <label>Status</label>
-                    <select v-model="form.status" class="mb-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                        <option value="0">Pending</option>
-                        <option value="1">Approved</option>
-                        <option value="2">Rejected</option>
+            <form v-if="editing" @submit.prevent="form.put(route('applications.update', application.id), { onSuccess: () => editing = false })">
+                <label class="text-gray-900 dark:text-gray-100">Company</label>
+                    <select v-model="form.company_id" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <option value="">Select</option>
+                        <option v-for="it in companies" :key="it" :value="it.id">{{ it.name }}</option>
                     </select>
-                <InputError :message="form.errors.status" class="mb-4" />
+                    <InputError :message="form.errors.company_id" class="mb-4" />
+
+
+                    <label class="text-gray-900 dark:text-gray-100">Status</label>
+                    <select v-model="form.status" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <option value="0">Sent</option>
+                        <option value="1">Ignored</option>
+                        <option value="2">Rejected</option>
+                        <option value="3">Technical Test</option>
+                        <option value="4">Offer</option>
+                    </select>
+                    <InputError :message="form.errors.status" class="mb-4" />
+
+                    <label class="text-gray-900 dark:text-gray-100">Role</label>
+                    <input
+                        v-model="form.role"
+                        class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    ></input>
+                    <InputError :message="form.errors.role" class="mb-4" />
+
+                    <label class="text-gray-900 dark:text-gray-100">Notes</label>
+                    <input
+                        v-model="form.notes"
+                        class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    ></input>
+                    <InputError :message="form.errors.notes" class="mb-4" />
+
                 <input type="hidden" v-model="form.id" />
                 <div class="space-x-2">
                     <PrimaryButton class="mt-4">Update</PrimaryButton>
-                    <button class="mt-4" @click="editing = false; form.reset(); form.clearErrors()">Cancel</button>
+                    <button class="text-gray-900 dark:text-gray-100 mt-4" @click="editing = false; form.reset(); form.clearErrors()">Cancel</button>
                 </div>
             </form>
-            <div v-else class="mt-4 text-lg text-gray-900">
-                <p>Type: {{ type[request.type] }}</p>
-                <p v-if="request.type === 0">Item: {{ getItemById(request.item_id) }}</p>
-                <p v-else>Item: {{ request.item }}</p>
-                <p>Quantity requested: {{ request.qta }}</p>
-                <p>Status: {{ status[request.status] }}</p>
+            <div v-else class="mt-4 text-lg text-gray-900 dark:text-gray-100">
+                <p>Company: {{ getItemById(application.company_id) }}</p>
+                <p>Status: {{ status[application.status] }}</p>
+                <p>Role: {{ application.role }}</p>
+                <p>Notes: {{ application.notes }}</p>
             </div>
         </div>
     </div>
