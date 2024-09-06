@@ -9,7 +9,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const requestData = ref({
-    labels: ['Rejected', 'Approved', 'Pending'],
+    labels: ['Office', 'Remote', 'Hybrid'],
     datasets: [{
         backgroundColor: ['#bb1616', '#16bb3f', '#f8ea17'],
         data: [3, 10, 5]
@@ -21,10 +21,10 @@ const requestOptions = ref ({
 });
 
 const categoryData = ref({
-    labels: ['None', 'Hard', 'Soft', 'Useless', 'Need'],
+    labels: ['Sent', 'Ignored', 'Rejected'],
     datasets: [{
-        backgroundColor: ['rgb(255, 159, 64)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)'],
-        data: [3, 2, 1, 4, 5]
+        backgroundColor: [ 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(255, 205, 86)'],
+        data: [3, 1, 4]
     }]
 });
 const categoryOptions = ref ({
@@ -47,8 +47,8 @@ const categoryOptions = ref ({
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <SingleCard title="Total" :counter="142" icon-color="blue" icon="pi-folder-open" />
                     <SingleCard title="Sent" :counter="54" icon-color="purple" icon="pi-file-arrow-up" />
-                    <SingleCard title="Ignored" :counter="19" icon-color="orange" icon="pi-ban" />
-                    <SingleCard title="Reject" :counter="3" icon-color="red" icon="pi-times" />
+                    <SingleCard title="Ignored" :counter="15" icon-color="orange" icon="pi-ban" />
+                    <SingleCard title="Reject" :counter="73" icon-color="red" icon="pi-times" />
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900 dark:text-gray-100 max-h-80 mb-2">
                             <p class="font-semibold text-center">Work Type</p>
