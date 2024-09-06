@@ -36,7 +36,10 @@ import { ref } from 'vue';
           <div class="text-gray-900 dark:text-gray-100 font-medium text-xl">{{counter}}</div>
         </div>
         <div class="flex items-center justify-center rounded-md" :class="{ 'bg-blue-100': blue, 'bg-purple-100': purple, 'bg-orange-100': orange, 'bg-red-100': red }" style="width:2.5rem;height:2.5rem">
-          <font-awesome-icon icon="fa-solid fa-user" class="text-xl" :class="{ 'text-blue-500': blue, 'text-purple-500': purple, 'text-orange-500': orange, 'text-red-500': red }" />
+          <font-awesome-icon v-if="blue" icon="fa-solid fa-folder-open" class="text-xl text-blue-500" />
+          <font-awesome-icon v-if="purple" icon="fa-solid fa-jet-fighter" class="text-xl text-purple-500" />
+          <font-awesome-icon v-if="orange" icon="fa-solid fa-clipboard-question" class="text-xl text-orange-500" />
+          <font-awesome-icon v-if="red" icon="fa-solid fa-x" class="text-xl text-red-500" />
         </div>
       </div>
     </div>

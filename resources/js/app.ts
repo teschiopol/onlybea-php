@@ -13,10 +13,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faX, faJetFighter, faClipboardQuestion, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faUser)
+library.add(faX, faJetFighter, faClipboardQuestion, faFolderOpen)
 
 const appName = import.meta.env.VITE_APP_NAME || 'OnlyBEA';
 
