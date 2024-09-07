@@ -15,6 +15,7 @@ if (localStorage.getItem("color-theme") === "dark") {
 }
 
 ChartJS.register(ArcElement, Tooltip, Legend)
+// @ts-ignore
 ChartJS.overrides['pie'].plugins.legend.labels.color = themeColor;
 
 const props = defineProps([
