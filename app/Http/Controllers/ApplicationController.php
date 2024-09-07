@@ -40,6 +40,7 @@ class ApplicationController extends Controller
         $validated = $request->validate([
             'company_id' => 'required|integer',
             'status' => 'required|integer',
+            'type' => 'required|integer',
             'notes' => 'nullable|string|max:255',
             'role' => 'required|string|max:255'
         ]);
@@ -80,6 +81,7 @@ class ApplicationController extends Controller
             'id' => 'required|integer',
             'company_id' => 'required|integer',
             'status' => 'required|integer',
+            'type' => 'required|integer',
             'notes' => 'nullable|string|max:255',
             'role' => 'required|string|max:255'
         ]);
@@ -92,6 +94,7 @@ class ApplicationController extends Controller
             
         $req->company_id = $validated['company_id'];
         $req->status = $validated['status'];
+        $req->type = $validated['type'];
         $req->notes = $validated['notes'];
         $req->role = $validated['role'];
 

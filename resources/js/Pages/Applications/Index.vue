@@ -11,7 +11,8 @@ const form = useForm({
     company_id: '',
     role: '',
     notes: '',
-    status: 0
+    status: 0,
+    type: 0
 });
 </script>
  
@@ -43,6 +44,14 @@ const form = useForm({
                         <option value="4">Offer</option>
                     </select>
                     <InputError :message="form.errors.status" class="mb-4" />
+
+                    <label class="text-gray-900 dark:text-gray-100">Type</label>
+                    <select v-model="form.type" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <option value="0">Remote</option>
+                        <option value="1">Hybrid</option>
+                        <option value="2">Office</option>
+                    </select>
+                    <InputError :message="form.errors.type" class="mb-4" />
 
                     <label class="text-gray-900 dark:text-gray-100">Role</label>
                     <input

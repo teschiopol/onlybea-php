@@ -14,7 +14,8 @@ class Application extends Model
         'status',
         'role',
         'notes',
-        'company_id'
+        'company_id',
+        'type'
     ];
 
     public function user(): BelongsTo

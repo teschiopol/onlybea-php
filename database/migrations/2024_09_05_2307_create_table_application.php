@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->integer('status')->default(0);
+            $table->integer('type')->default(0);
             $table->string('role');
             $table->string('notes');
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();

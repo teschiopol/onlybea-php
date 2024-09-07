@@ -13,6 +13,7 @@ const props = defineProps(['application', 'companies']);
  
 const form = useForm({
     status: props.application.status,
+    type: props.application.type,
     id: props.application.id,
     company_id: props.application.company_id,
     role: props.application.role,
@@ -21,6 +22,10 @@ const form = useForm({
 
 const status = [
     'Sent', 'Ignored', 'Rejected', 'Technical Test', 'Offer'
+];
+
+const type = [
+    'Remote', 'Hybrid', 'Office'
 ];
 
 const editing = ref(false);
@@ -79,6 +84,14 @@ const getItemById = (id) => {
                     </select>
                     <InputError :message="form.errors.status" class="mb-4" />
 
+                    <label class="text-gray-900 dark:text-gray-100">Type</label>
+                    <select v-model="form.type" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <option value="0">Remote</option>
+                        <option value="1">Hybrid</option>
+                        <option value="2">Office</option>
+                    </select>
+                    <InputError :message="form.errors.type" class="mb-4" />
+
                     <label class="text-gray-900 dark:text-gray-100">Role</label>
                     <input
                         v-model="form.role"
@@ -102,6 +115,7 @@ const getItemById = (id) => {
             <div v-else class="mt-4 text-lg text-gray-900 dark:text-gray-100">
                 <p>Company: {{ getItemById(application.company_id) }}</p>
                 <p>Status: {{ status[application.status] }}</p>
+                <p>Type: {{ type[application.type] }}</p>
                 <p>Role: {{ application.role }}</p>
                 <p>Notes: {{ application.notes }}</p>
             </div>
