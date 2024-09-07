@@ -28,7 +28,7 @@ Change file .env.example in .env and launch
 php artisan key:generate
 ```
 
-Copy the key in APP_KEY
+You will see the key in APP_KEY
 
 ## Run 🏃🏻‍♂️
 
