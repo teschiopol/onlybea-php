@@ -6,7 +6,16 @@ import { ref } from 'vue';
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 
+const themeColor = ref('black');
+
+if (localStorage.getItem("color-theme") === "dark") {
+    themeColor.value = 'white';
+} else {
+    themeColor.value = 'black';
+}
+
 ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.overrides['pie'].plugins.legend.labels.color = themeColor;
 
 const props = defineProps([
     'total',
@@ -23,7 +32,7 @@ const props = defineProps([
 const requestData = ref({
     labels: ['Office', 'Remote', 'Hybrid'],
     datasets: [{
-        backgroundColor: ['#bb1616', '#16bb3f', '#f8ea17'],
+        backgroundColor: [ 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(255, 205, 86)'],
         data: [props.office, props.remote, props.hybrid]
     }]
 });
@@ -35,7 +44,7 @@ const requestOptions = ref ({
 const categoryData = ref({
     labels: ['Sent', 'Ignored', 'Rejected', 'Technical Test', 'Offer'],
     datasets: [{
-        backgroundColor: [ 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(255, 205, 86)'],
+        backgroundColor: [ 'purple', 'orange', 'red', '#1A1B41', '#C2E7DA'],
         data: [props.sent, props.ignored, props.reject, props.tech, props.offer]
     }]
 });
@@ -68,7 +77,11 @@ const categoryOptions = ref ({
                                 id="request-stats"
                                 :options="requestOptions"
                                 :data="requestData"
+                                v-if="total > 0"
                             />
+                            <p v-else>
+                                No data
+                            </p>
                         </div>
                     </div>
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -78,7 +91,11 @@ const categoryOptions = ref ({
                                 id="rcategory-stats"
                                 :options="categoryOptions"
                                 :data="categoryData"
+                                v-if="total > 0"
                             />
+                            <p v-else>
+                                No data
+                            </p>
                         </div>
                     </div>
                 </div>
