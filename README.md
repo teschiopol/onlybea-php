@@ -2,7 +2,7 @@
 
 Best Employees Advisor
 
-## Requirements
+## Requirements 🤖
 
 App is tested with
 
@@ -10,7 +10,7 @@ App is tested with
 - Laravel v11.21.0
 - Vue v3.4
 
-## Install
+## Install 💾
 
 ```bash
 composer install
@@ -24,7 +24,7 @@ npm run build
 
 Enter admin@test.it - admintest
 
-## Run
+## Run 🏃🏻‍♂️
 
 ```bash
 php artisan serve
@@ -32,13 +32,25 @@ php artisan serve
 
 Then open the [web app](http://localhost:8000/).
 
-## Test
+If you want example data
+
+```bash
+php artisan db:seed
+```
+
+## Docker 🐳
+
+```bash
+docker compose up
+```
+
+## Test 🔍
 
 ```bash
 php artisan test
 ```
 
-### Troubleshoot
+### Troubleshoot 🛠️
 
 If you encounter in a error like `No application encryption key has been specified.`, try this command and then restart the server.
 

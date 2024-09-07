@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  fe:
+    image: fe
+    build:
+      context: frontend
+      dockerfile: Fe.Dockerfile
+  be:
+     image: be
+     build:
+      context: backend
+      dockerfile: Be.Dockerfile
