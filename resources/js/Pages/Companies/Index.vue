@@ -23,7 +23,7 @@ const filteredItems = computed(() => {
   }
 
   return res.filter((item) => {
-    return item.name.includes(search.value);
+    return item.name.toLowerCase().includes(search.value.toLowerCase()) || item.hq.toLowerCase().includes(search.value.toLowerCase());
   });
 });
 </script>
