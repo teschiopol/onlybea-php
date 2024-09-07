@@ -12,14 +12,6 @@ App is tested with
 
 ## Install 💾
 
-Change file .env.example in .env and launch
-
-```bash
-php artisan key:generate
-```
-
-Copy the key in APP_KEY
-
 ```bash
 composer install
 
@@ -30,7 +22,13 @@ npm i
 npm run build
 ```
 
-Enter admin@test.it - admintest
+Change file .env.example in .env and launch
+
+```bash
+php artisan key:generate
+```
+
+Copy the key in APP_KEY
 
 ## Run 🏃🏻‍♂️
 
@@ -39,6 +37,8 @@ php artisan serve
 ```
 
 Then open the [web app](http://localhost:8000/).
+
+Enter admin@test.it - admintest
 
 If you want example data
 
