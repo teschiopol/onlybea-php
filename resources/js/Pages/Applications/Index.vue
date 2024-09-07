@@ -25,7 +25,7 @@ const form = useForm({
 
         <div class="py-12">
             <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                <form v-if="companies.length > 0" @submit.prevent="form.post(route('applications.store'), { onSuccess: () => form.reset() })">
+                <form v-if="Object.keys(companies).length !== 0" @submit.prevent="form.post(route('applications.store'), { onSuccess: () => form.reset() })">
 
                     <label class="text-gray-900 dark:text-gray-100">Company</label>
                     <select v-model="form.company_id" class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-4 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
