@@ -12,6 +12,14 @@ App is tested with
 
 ## Install 💾
 
+Change file .env.example in .env and launch
+
+```bash
+php artisan key:generate
+```
+
+Copy the key in APP_KEY
+
 ```bash
 composer install
 
